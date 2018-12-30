@@ -42,7 +42,6 @@ void extrag_nume_poze_parte_template_matching(char *nume_poza_nonmax,char *nume_
 }
 int main()
 {
-    int **I;
     pixel *Cprim;
     char *nume_poza,*nume_poza_decript,*secret_key,*nume_poza_cript;
     nume_poza=(char *)malloc(50*sizeof(char));
@@ -75,6 +74,11 @@ int main()
     frecvente_pentru_culoare(nume_poza_cript,P_cript,&chiR_cript,&chiG_cript,&chiB_cript);
     printf("%f %f %f\n",chiR_cript,chiG_cript,chiB_cript);
 
+    free(P);
+    free(P_cript);
+    free(Cprim);
+    free(secret_key);
+
    // template matching
 
 
@@ -103,10 +107,6 @@ int main()
     free(nume_poza_nonmax);
     free(nume_template_matching);
     free(S);
-    free(P);
-    free(P_cript);
-    free(Cprim);
-    free(secret_key);
     free(C);
     free(nume_poza);
     free(S_gray);
