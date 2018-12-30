@@ -43,13 +43,18 @@ typedef struct
 
 //save an imagine considering the fact that it is a grayscale one(R=G=B)
 
-void salvez_pixeli_imagine(unsigned int ***a,char *nume_poza)
+void salvez_pixeli_imagine(unsigned int ***a,char *nume_poza,unsigned int W, unsigned int H)
 {
-    unsigned int W,H;
+   // unsigned int W,H;
     unsigned char x;
     int i,j;
     FILE *f =fopen(nume_poza,"rb");
-    extrag_dimensiuni(nume_poza,&W,&H);
+    if( f== NULL)
+    {
+        printf("Nu s-a putut deschide fisierul %s",nume_poza);
+        return;
+    }
+   // extrag_dimensiuni(nume_poza,&W,&H);
     int padding;
     if(W % 4 != 0)
         padding = 4 - (3 * W) % 4;
@@ -130,8 +135,18 @@ double corelatie(unsigned int **f, unsigned int **S,unsigned int W, unsigned int
 void extrag_nume_sabloane(char ***A,char *nume_fisier)
 {
     FILE *f=fopen(nume_fisier,"r");
+    if(f ==  NULL)
+    {
+        printf("Nu s-a putut deschide fisierul %s",nume_fisier);
+        return ;
+    }
     (*A)=(char **)malloc(10*sizeof(char *));
     char *s=(char *)malloc(15*sizeof(char));
+    if( A== NULL || s == NULL)
+    {
+        printf("Nu s-a putut aloca memorie");
+        return ;
+    }
     int i;
     for(i=0;i<10;i++)
     {
@@ -150,7 +165,17 @@ void extrag_nume_sabloane(char ***A,char *nume_fisier)
 void extrag_culori(culoare **C, char *nume_fisier)
 {
     FILE *f=fopen(nume_fisier,"r");
+    if(f == NULL)
+    {
+        printf("Nu s-a putut deschide fisierul %s",nume_fisier);
+        return ;
+    }
     (*C)=(culoare *)malloc(10*sizeof(culoare));
+    if(C == NULL)
+    {
+        printf("Nu s-a putut aloca memorie");
+        return ;
+    }
     int i;
     int x;
     for( i=0;i<10;i++)
@@ -285,6 +310,14 @@ void salvez_extern_poza(char *nume_poza,char *poza_originala,culoare **P)
     extrag_dimensiuni(poza_originala,&W,&H);
     FILE * f= fopen(nume_poza,"wb");
     FILE *pep=fopen(poza_originala,"rb");
+    if( f == NULL)
+    {
+        printf("Nu s-a putut deschide fisierul %s",nume_poza);
+    }
+    if(pep == NULL)
+    {
+        printf("Nu s-a putut deschide fisierul %s",poza_originala);
+    }
     unsigned char x;
     int i,j;
 
@@ -318,7 +351,7 @@ void gasesc_detectii_sablon_x(int **I,culoare **I_color,char *nume_sablon,unsign
     f=(int **)malloc(HS*sizeof(int *));
     for(p=0;p<HS;p++)
         f[p]=(int *)malloc(WS*sizeof(int));
-    salvez_pixeli_imagine(&S,nume_sablon);
+    salvez_pixeli_imagine(&S,nume_sablon,WS,HS);
     double medie_sablon=medie_pixel_tablou(S,WS,HS);
 
      for(i=HS/2;i<HI-HS/2;i++)
@@ -358,13 +391,18 @@ void template_matching(char *nume_poza,char *nume_poza_gray,char **lista_sabloan
 {
     *k=0;
     *D=(detectii*)malloc(100000*sizeof(detectii));
+    if( D == NULL)
+    {
+        printf("Nu s-a putut aloca memorie");
+        return ;
+    }
     unsigned int WS,HS,WI,HI;
     int i;
     int **I;
     culoare **I_color;
     extrag_dimensiuni(nume_poza_gray,&WI,&HI);
     extrag_dimensiuni(lista_sabloane_gray[0],&WS,&HS);
-    salvez_pixeli_imagine(&I,nume_poza_gray);
+    salvez_pixeli_imagine(&I,nume_poza_gray,WI,HI);
     incarc_imagine_color(nume_poza,&I_color);
     for(i=0;i<10;i++)
     {

@@ -7,7 +7,7 @@
 
 
 void extrag_dimensiuni(char *,unsigned int *,unsigned int *);
-void salvez_pixeli_imagine(unsigned int ***,char *);
+void salvez_pixeli_imagine(unsigned int ***,char *,unsigned int, unsigned int );
 float medie_pixel_tablou(unsigned int  **, unsigned int, unsigned int);
 double deviatie_standard(unsigned int **,unsigned int, unsigned int);
 double corelatie(unsigned int **, unsigned int **,unsigned int, unsigned int,double,double);

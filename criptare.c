@@ -41,6 +41,11 @@ void incarc_poza(char *nume_poza,pixel **P,unsigned int W, unsigned int H)
     else
     {
         *P=(pixel *)malloc(W*H*sizeof(pixel));
+        if( P == NULL)
+        {
+            printf("Nu s-a putut aloca memorie");
+            return ;
+        }
         unsigned char x;
         fseek(f,54,SEEK_SET); //trec de header
         int padding;
@@ -79,6 +84,11 @@ void salvez_extern_poza_liniarizata(char *nume_poza,char *poza_originala,pixel *
 
     FILE * f= fopen(nume_poza,"wb");
     FILE *pep=fopen(poza_originala,"rb");
+    if( f== NULL || pep == NULL)
+    {
+        printf("Nu s-a putut deschide fisierul %s",nume_poza);
+        return;
+    }
     unsigned char x;
     int i,k;
     unsigned char y=0;
@@ -120,6 +130,11 @@ void salvez_extern_poza_liniarizata(char *nume_poza,char *poza_originala,pixel *
 void xorShift(unsigned int R0,unsigned int **R,int W, int H)
 {
    *R= (unsigned int *)malloc(2*H*W*sizeof(unsigned int));
+   if( R == NULL)
+   {
+       printf("Nu s-a putut aloca memorie");
+       return ;
+   }
    int i;
    unsigned long r=R0;
     for( i=1;i<2*H*W;i++)
@@ -137,6 +152,11 @@ void xorShift(unsigned int R0,unsigned int **R,int W, int H)
 void get_cheie_secreta(unsigned int *R0, unsigned int *SV,char *cheie_secreta)
 {
     FILE *f=fopen(cheie_secreta,"r");
+    if( f ==NULL)
+    {
+        printf("Nu s-a putut deschide fisierul %s",cheie_secreta);
+        return ;
+    }
     fscanf(f,"%u",R0);
     fscanf(f,"%u",SV);
 
@@ -145,6 +165,11 @@ void get_cheie_secreta(unsigned int *R0, unsigned int *SV,char *cheie_secreta)
 void generare_permutare(unsigned int *R, int W, int H,unsigned int **perm)
 {
     *perm=(int *)malloc((W*H)*sizeof(int));
+    if(perm == NULL)
+    {
+        printf("Nu s-a putut aloca memeorie");
+        return ;
+    }
     for(int i=0;i<W*H;i++)
         (*perm)[i]=i;
     for(int i=W*H-1;i>=1;i--)
@@ -163,6 +188,11 @@ void permut_pixeli_imagine(pixel *P,int W, int H,int *perm)
 
 
     Pprim =(pixel *)malloc(W*H*sizeof(pixel));
+    if( Pprim == NULL)
+    {
+        printf("Nu s-a putut aloca memorie");
+        return;
+    }
     int i;
     for(i=0;i<W*H;i++)
     {
@@ -213,6 +243,11 @@ void salvez_imagine_criptata(char *poza_intiala,char *cheie_secreta,char *imagin
     get_cheie_secreta(&R0,&SV,cheie_secreta);
     extrag_dimensiuni(poza_intiala,&W,&H);
     (*Cript)=(pixel *)malloc(W*H*sizeof(pixel));
+    if(Cript == NULL)
+    {
+        printf("Nu s-a putut aloca memorie");
+        return;
+    }
     xorShift(R0,&R,W,H);
     incarc_poza(poza_intiala,&P,W,H);
     generare_permutare(R,W,H,&perm);
@@ -230,6 +265,11 @@ void permutare_inversa(int *perm, int **perm_invers,unsigned int W,unsigned int 
 {
     int i,j;
     *perm_invers=(int *)malloc(W*H*sizeof(int));
+    if(perm_invers == NULL)
+    {
+        printf("Nu s-a putut aloca memorie");
+        return ;
+    }
     for(int i=0;i<W*H;i++)
         (*perm_invers)[perm[i]]=i;
 
@@ -241,6 +281,11 @@ void inversul_criptarii(pixel **Cprim,pixel *C, unsigned int *R,unsigned int SV,
 {
     unsigned int SV0,SV1,SV2,R0,R1,R2;
     *Cprim=(pixel *)malloc(W*H*sizeof(pixel));
+    if(Cprim == NULL)
+    {
+        printf("Nu s-a putut aloca memorie");
+        return ;
+    }
     byte(SV,&SV0,&SV1,&SV2);
     byte(R[W*H],&R0,&R1,&R2);
     (*Cprim)[0].R=SV2^C[0].R^R2;
@@ -294,6 +339,11 @@ void frecvente_pentru_culoare(char *nume_poza,pixel *P,float *chiR,float *chiG,f
     int *fr;
     *chiB=*chiG=*chiR=0;
     fr=(int *)malloc(256*sizeof(int));
+    if(fr == NULL)
+    {
+        printf("Nu s-a putut aloca memorie");
+        return;
+    }
     int i;
     for(i=0;i<256;i++) fr[i]=0;
     unsigned int W,H;

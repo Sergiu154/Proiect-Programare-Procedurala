@@ -18,3 +18,22 @@
 
 1545403510 c:\users\talma\documents\facultate\programare procedurala\proiectpp\proiect\criptare.c
 
+1545239477 source:c:\users\talma\documents\facultate\programare procedurala\proiectpp\proiect programare procedurala\main.c
+	<stdio.h>
+	<stdlib.h>
+	"template_matching.c"
+	"template_matching.h"
+	"criptare.c"
+
+1546190834 c:\users\talma\documents\facultate\programare procedurala\proiectpp\proiect programare procedurala\template_matching.c
+	"grayscale.c"
+	<math.h>
+	<string.h>
+
+1544170130 c:\users\talma\documents\facultate\programare procedurala\proiectpp\proiect programare procedurala\grayscale.c
+	<stdio.h>
+
+1546190847 c:\users\talma\documents\facultate\programare procedurala\proiectpp\proiect programare procedurala\template_matching.h
+
+1546190397 c:\users\talma\documents\facultate\programare procedurala\proiectpp\proiect programare procedurala\criptare.c
+
