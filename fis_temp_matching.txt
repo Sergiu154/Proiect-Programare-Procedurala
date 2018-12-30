@@ -1,0 +1,3 @@
+test_nonmax.bmp
+test_template.bmp
+test_gray.bmp

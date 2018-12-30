@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1545239477 source:c:\users\talma\documents\facultate\programare procedurala\proiectpp\proiect\main.c
+	<stdio.h>
+	<stdlib.h>
+	"template_matching.c"
+	"template_matching.h"
+	"criptare.c"
+
+1545398840 c:\users\talma\documents\facultate\programare procedurala\proiectpp\proiect\template_matching.c
+	"grayscale.c"
+	<math.h>
+	<string.h>
+
+1544170130 c:\users\talma\documents\facultate\programare procedurala\proiectpp\proiect\grayscale.c
+	<stdio.h>
+
+1545229380 c:\users\talma\documents\facultate\programare procedurala\proiectpp\proiect\template_matching.h
+
+1545403510 c:\users\talma\documents\facultate\programare procedurala\proiectpp\proiect\criptare.c
+

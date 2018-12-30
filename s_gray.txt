@@ -1,0 +1,11 @@
+gray0.bmp
+gray1.bmp
+gray2.bmp
+gray3.bmp
+gray4.bmp
+gray5.bmp
+gray6.bmp
+gray7.bmp
+gray8.bmp
+gray9.bmp
+
